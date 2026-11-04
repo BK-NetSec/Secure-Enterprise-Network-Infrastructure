@@ -1,0 +1,116 @@
+# Sample configurations from Appendix A of the project report (transcribed from screenshots).
+# Partial excerpts only, not full device configurations. Full dumps were lost in the eNSP crash.
+#==================== EDGE_ROUTER1 ====================
+interface GigabitEthernet0/0/0
+ description Link_to_F1_Master
+ ip address 10.10.40.2 255.255.255.252
+#
+interface GigabitEthernet0/0/1
+ description Link_to_F2_Standby
+ ip address 10.10.40.10 255.255.255.252
+#
+interface GigabitEthernet0/0/2
+ description Link_to_R2_Heartbeat
+#
+interface GigabitEthernet0/0/2.55
+ dot1q termination vid 55
+ ip address 10.12.12.1 255.255.255.240
+ vrrp vrid 1 virtual-ip 10.12.12.14
+ vrrp vrid 1 priority 120
+ vrrp vrid 1 preempt-mode timer delay 20
+ arp broadcast enable
+#
+interface GigabitEthernet0/0/2.100
+ dot1q termination vid 100
+#
+interface GigabitEthernet4/0/0
+ description TO_ISP
+ ip address 172.16.255.2 255.255.255.252
+
+#==================== CORE-1 (excerpt) ====================
+interface GE1/0/6
+ undo portswitch
+ undo shutdown
+ ip address 10.20.20.2 255.255.255.252
+#
+interface GE1/0/7
+ undo shutdown
+ port default vlan 150
+#
+interface GE1/0/8
+ undo portswitch
+ undo shutdown
+ ip address 10.20.20.10 255.255.255.252
+#
+interface GE1/0/9
+ undo shutdown
+ port default vlan 130
+#
+interface LoopBack0
+ ip address 1.1.1.1 255.255.255.255
+#
+ospf 1 router-id 1.1.1.1
+ area 0.0.0.0
+  network 1.1.1.1 0.0.0.0
+  network 10.0.0.0 0.0.0.0
+  network 10.0.0.0 0.0.0.3
+  network 10.1.0.0 0.0.0.3
+  network 10.1.0.4 0.0.0.3
+  network 10.1.0.8 0.0.0.3
+  network 10.1.0.12 0.0.0.3
+  network 10.2.0.0 0.0.0.3
+  network 10.2.0.8 0.0.0.3
+  network 10.10.0.0 0.0.0.3
+  network 10.10.0.8 0.0.0.3
+  network 10.20.20.0 0.0.0.3
+  # remaining lines were cut off in the screenshot
+
+#==================== VRRP sample (report Appendix A) ====================
+# NOTE: the report labels these "CORE-SW1/2" and VLAN 10 with VIP 192.168.10.1.
+# The verified output in the test results shows VIP 192.168.10.254 on the distribution switches.
+# Master
+interface Vlanif10
+ ip address 192.168.10.2 255.255.255.0
+ vrrp vrid 10 virtual-ip 192.168.10.1
+ vrrp vrid 10 priority 120
+ vrrp vrid 10 preempt-mode enable
+# Backup
+interface Vlanif10
+ ip address 192.168.10.3 255.255.255.0
+ vrrp vrid 10 virtual-ip 192.168.10.1
+ vrrp vrid 10 priority 100
+ vrrp vrid 10 preempt-mode enable
+
+#==================== OSPF sample ====================
+# CORE-SW1
+ospf 1 router-id 1.1.1.1
+ area 0
+  network 192.168.0.0 0.0.255.255
+  network 172.16.0.0 0.0.255.255
+# CORE-SW2
+ospf 1 router-id 2.2.2.2
+ area 0
+  network 192.168.0.0 0.0.255.255
+  network 172.16.0.0 0.0.255.255
+
+#==================== Eth-Trunk / LACP sample ====================
+interface Eth-Trunk1
+ mode lacp-static
+ trunkport GigabitEthernet0/0/1
+ trunkport GigabitEthernet0/0/2
+ quit
+interface Eth-Trunk1
+ port link-type trunk
+ port trunk allow-pass vlan all
+
+#==================== Firewall HRP sample (as written in the report) ====================
+# F1 (Active)
+hrp enable
+hrp interface GigabitEthernet1/0/0 virtual-ip 172.16.210.1
+hrp interface GigabitEthernet1/0/0 priority 100
+# F2 (Standby)
+hrp enable
+hrp interface GigabitEthernet1/0/0 virtual-ip 172.16.210.1
+hrp interface GigabitEthernet1/0/0 priority 90
+# NOTE: verify this syntax in your rebuilt lab. On real USG firmware the HRP heartbeat is
+# normally set with "hrp interface <if> remote <peer-ip>" and the virtual IP with VRRP groups.
