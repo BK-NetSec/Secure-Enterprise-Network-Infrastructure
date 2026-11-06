@@ -1,0 +1,117 @@
+system-view
+sysname FW1
+#
+interface GigabitEthernet1/0/0
+ ip address 10.10.40.1 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/1
+ ip address 10.10.40.5 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/2
+ ip address 10.20.20.1 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/3
+ ip address 10.20.20.5 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/4
+ ip address 172.16.230.2 255.255.255.0
+ vrrp vrid 3 virtual-ip 172.16.230.1 active
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/5
+ ip address 172.16.210.1 255.255.255.252
+#
+firewall zone trust
+ add interface GigabitEthernet1/0/2
+ add interface GigabitEthernet1/0/3
+#
+firewall zone untrust
+ add interface GigabitEthernet1/0/0
+ add interface GigabitEthernet1/0/1
+#
+firewall zone dmz
+ add interface GigabitEthernet1/0/4
+#
+firewall zone name heartbeat
+ set priority 75
+ add interface GigabitEthernet1/0/5
+#
+ospf 1 router-id 15.15.15.15
+ default-route-advertise
+ silent-interface GigabitEthernet1/0/4
+ area 0.0.0.0
+  network 10.20.20.0 0.0.0.3
+  network 10.20.20.4 0.0.0.3
+  network 172.16.230.0 0.0.0.255
+#
+ip route-static 0.0.0.0 0.0.0.0 10.10.40.2
+ip route-static 0.0.0.0 0.0.0.0 10.10.40.6 preference 70
+ip route-static 197.156.10.10 255.255.255.255 NULL0
+ip route-static 197.156.10.100 255.255.255.255 NULL0
+#
+hrp interface GigabitEthernet 1/0/5 remote 172.16.210.2
+hrp enable
+hrp mirror session enable
+hrp ospf-cost adjust-enable
+
+#
+security-policy
+ rule name local_trust
+  source-zone local
+  source-zone trust
+  destination-zone local
+  destination-zone trust
+  action permit
+ rule name local_heartbeat
+  source-zone local
+  source-zone heartbeat
+  destination-zone local
+  destination-zone heartbeat
+  action permit
+ rule name local_untrust_ping
+  source-zone local
+  source-zone untrust
+  destination-zone local
+  destination-zone untrust
+  service icmp
+  action permit
+ rule name trust_to_untrust
+  source-zone trust
+  destination-zone untrust
+  action permit
+ rule name trust_to_dmz
+  source-zone trust
+  destination-zone dmz
+  action permit
+ rule name untrust_to_dmz_web
+  source-zone untrust
+  destination-zone dmz
+  destination-address 172.16.230.10 32
+  service http
+  service https
+  action permit
+#
+nat address-group PAT_POOL
+ mode pat
+ section 0 197.156.10.100 197.156.10.100
+#
+nat-policy
+ rule name pat_overload
+  source-zone trust
+  destination-zone untrust
+  action source-nat address-group PAT_POOL
+#
+nat server web_http protocol tcp global 197.156.10.10 80 inside 172.16.230.10 80
+nat server web_https protocol tcp global 197.156.10.10 443 inside 172.16.230.10 443
+#
+return
+save

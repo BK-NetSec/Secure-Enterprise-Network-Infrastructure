@@ -1,0 +1,341 @@
+# ===== AC-1 (VLAN 10) =====
+system-view
+sysname AC-1
+#
+vlan batch 10 to 20 99
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 10
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 10
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-2 (VLAN 11) =====
+system-view
+sysname AC-2
+#
+vlan batch 10 to 20 99
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 11
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 11
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-3 (VLAN 17) =====
+system-view
+sysname AC-3
+#
+vlan batch 10 to 20 99
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 17
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 17
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-4 (VLAN 19) =====
+system-view
+sysname AC-4
+#
+vlan batch 10 to 20 99
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 19
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 19
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-5 (VLAN 21) =====
+system-view
+sysname AC-5
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 21
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 21
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-6 (VLAN 22) =====
+system-view
+sysname AC-6
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 22
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 22
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-7 (VLAN 23) =====
+system-view
+sysname AC-7
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 23
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 23
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-8 (VLAN 24) =====
+system-view
+sysname AC-8
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 24
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 24
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save
+
+# ===== AC-9 (VLAN 25) =====
+system-view
+sysname AC-9
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp bpdu-protection
+dhcp enable
+dhcp snooping enable
+#
+vlan 25
+ dhcp snooping enable
+ arp anti-attack check user-bind enable
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+ dhcp snooping trusted
+#
+port-group ACCESS
+ group-member Ethernet0/0/1 to Ethernet0/0/10
+ port link-type access
+ port default vlan 25
+ stp edged-port enable
+ port-security enable
+ port-security mac-address sticky
+ port-security max-mac-num 2
+ port-security protect-action restrict
+#
+return
+save

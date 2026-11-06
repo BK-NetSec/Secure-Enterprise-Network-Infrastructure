@@ -1,0 +1,143 @@
+system-view
+sysname CAM-2_DSW-2
+#
+vlan batch 21 to 31
+#
+stp mode rstp
+stp root secondary
+dhcp enable
+#
+interface Eth-Trunk2
+ mode lacp-static
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface GigabitEthernet0/0/3
+ eth-trunk 2
+#
+interface GigabitEthernet0/0/4
+ eth-trunk 2
+#
+interface GigabitEthernet0/0/1
+ undo portswitch
+ ip address 10.1.0.10 255.255.255.252
+#
+interface GigabitEthernet0/0/2
+ undo portswitch
+ ip address 10.2.0.14 255.255.255.252
+#
+interface GigabitEthernet0/0/5
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface GigabitEthernet0/0/6
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface GigabitEthernet0/0/7
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface GigabitEthernet0/0/8
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface GigabitEthernet0/0/9
+ port link-type trunk
+ port trunk allow-pass vlan 21 to 31
+#
+interface Vlanif21
+ ip address 192.168.21.3 255.255.255.0
+ vrrp vrid 21 virtual-ip 192.168.21.254
+ vrrp vrid 21 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif22
+ ip address 192.168.22.3 255.255.255.0
+ vrrp vrid 22 virtual-ip 192.168.22.254
+ vrrp vrid 22 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif23
+ ip address 192.168.23.3 255.255.255.0
+ vrrp vrid 23 virtual-ip 192.168.23.254
+ vrrp vrid 23 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif24
+ ip address 192.168.24.3 255.255.255.0
+ vrrp vrid 24 virtual-ip 192.168.24.254
+ vrrp vrid 24 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif25
+ ip address 192.168.25.3 255.255.255.0
+ vrrp vrid 25 virtual-ip 192.168.25.254
+ vrrp vrid 25 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif26
+ ip address 192.168.26.3 255.255.255.0
+ vrrp vrid 26 virtual-ip 192.168.26.254
+ vrrp vrid 26 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif27
+ ip address 192.168.27.3 255.255.255.0
+ vrrp vrid 27 virtual-ip 192.168.27.254
+ vrrp vrid 27 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif28
+ ip address 192.168.28.3 255.255.255.0
+ vrrp vrid 28 virtual-ip 192.168.28.254
+ vrrp vrid 28 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif29
+ ip address 192.168.29.3 255.255.255.0
+ vrrp vrid 29 virtual-ip 192.168.29.254
+ vrrp vrid 29 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif30
+ ip address 192.168.30.3 255.255.255.0
+ vrrp vrid 30 virtual-ip 192.168.30.254
+ vrrp vrid 30 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif31
+ ip address 192.168.31.3 255.255.255.0
+ vrrp vrid 31 virtual-ip 192.168.31.254
+ vrrp vrid 31 priority 100
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+ospf 1 router-id 6.6.6.6
+ silent-interface Vlanif21
+ silent-interface Vlanif22
+ silent-interface Vlanif23
+ silent-interface Vlanif24
+ silent-interface Vlanif25
+ silent-interface Vlanif26
+ silent-interface Vlanif27
+ silent-interface Vlanif28
+ silent-interface Vlanif29
+ silent-interface Vlanif30
+ silent-interface Vlanif31
+ area 0.0.0.0
+  network 10.0.0.0 0.255.255.255
+  network 192.168.0.0 0.0.255.255
+#
+return
+save

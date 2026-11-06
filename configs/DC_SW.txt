@@ -1,0 +1,33 @@
+system-view
+sysname DC_SW
+#
+vlan batch 100
+#
+stp mode rstp
+#
+interface GigabitEthernet0/0/1
+ port link-type trunk
+ port trunk allow-pass vlan 100
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ port trunk allow-pass vlan 100
+#
+interface GigabitEthernet0/0/3
+ port link-type access
+ port default vlan 100
+#
+interface GigabitEthernet0/0/4
+ port link-type access
+ port default vlan 100
+#
+interface GigabitEthernet0/0/5
+ port link-type access
+ port default vlan 100
+#
+interface GigabitEthernet0/0/6
+ port link-type access
+ port default vlan 100
+#
+return
+save

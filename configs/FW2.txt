@@ -1,0 +1,68 @@
+system-view
+sysname FW2
+#
+interface GigabitEthernet1/0/0
+ ip address 10.10.40.9 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/1
+ ip address 10.10.40.13 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/2
+ ip address 10.20.20.9 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/3
+ ip address 10.20.20.13 255.255.255.252
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/4
+ ip address 172.16.230.3 255.255.255.0
+ vrrp vrid 3 virtual-ip 172.16.230.1 standby
+ service-manage enable
+ service-manage ping permit
+#
+interface GigabitEthernet1/0/5
+ ip address 172.16.210.2 255.255.255.252
+#
+firewall zone trust
+ add interface GigabitEthernet1/0/2
+ add interface GigabitEthernet1/0/3
+#
+firewall zone untrust
+ add interface GigabitEthernet1/0/0
+ add interface GigabitEthernet1/0/1
+#
+firewall zone dmz
+ add interface GigabitEthernet1/0/4
+#
+firewall zone name heartbeat
+ set priority 75
+ add interface GigabitEthernet1/0/5
+#
+ospf 1 router-id 16.16.16.16
+ default-route-advertise
+ silent-interface GigabitEthernet1/0/4
+ area 0.0.0.0
+  network 10.20.20.8 0.0.0.3
+  network 10.20.20.12 0.0.0.3
+  network 172.16.230.0 0.0.0.255
+#
+ip route-static 0.0.0.0 0.0.0.0 10.10.40.10
+ip route-static 0.0.0.0 0.0.0.0 10.10.40.14 preference 70
+ip route-static 197.156.10.10 255.255.255.255 NULL0
+ip route-static 197.156.10.100 255.255.255.255 NULL0
+#
+hrp interface GigabitEthernet 1/0/5 remote 172.16.210.1
+hrp enable
+hrp mirror session enable
+hrp ospf-cost adjust-enable
+hrp standby-device
+#
+return
+save

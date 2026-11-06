@@ -1,0 +1,43 @@
+system-view
+sysname EDGE_ROUTER1
+#
+interface GigabitEthernet0/0/0
+ description Link_to_F1_Master
+ ip address 10.10.40.2 255.255.255.252
+#
+interface GigabitEthernet0/0/1
+ description Link_to_F2_Standby
+ ip address 10.10.40.10 255.255.255.252
+#
+interface GigabitEthernet0/0/2
+ description Link_to_R2_Heartbeat
+#
+interface GigabitEthernet0/0/2.55
+ dot1q termination vid 55
+ ip address 10.12.12.1 255.255.255.240
+ vrrp vrid 1 virtual-ip 10.12.12.14
+ vrrp vrid 1 priority 120
+ vrrp vrid 1 preempt-mode timer delay 20
+ arp broadcast enable
+#
+interface GigabitEthernet0/0/2.100
+ dot1q termination vid 100
+ arp broadcast enable
+#
+interface GigabitEthernet4/0/0
+ description TO_ISP
+ ip address 172.16.255.2 255.255.255.252
+#
+ip route-static 0.0.0.0 0.0.0.0 172.16.255.1
+ip route-static 0.0.0.0 0.0.0.0 10.12.12.2 preference 100
+ip route-static 192.168.0.0 255.255.0.0 10.10.40.1
+ip route-static 192.168.0.0 255.255.0.0 10.10.40.9 preference 70
+ip route-static 172.16.220.0 255.255.255.0 10.10.40.1
+ip route-static 172.16.220.0 255.255.255.0 10.10.40.9 preference 70
+ip route-static 172.16.230.0 255.255.255.0 10.10.40.1
+ip route-static 172.16.230.0 255.255.255.0 10.10.40.9 preference 70
+ip route-static 197.156.10.0 255.255.255.0 10.10.40.1
+ip route-static 197.156.10.0 255.255.255.0 10.10.40.9 preference 70
+#
+return
+save

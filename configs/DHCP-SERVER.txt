@@ -1,0 +1,174 @@
+system-view
+sysname DHCP-SERVER
+#
+dhcp enable
+#
+interface GigabitEthernet0/0/0
+ ip address 172.16.220.2 255.255.255.0
+ dhcp select global
+#
+ip route-static 0.0.0.0 0.0.0.0 172.16.220.254
+#
+ip pool VLAN10
+ gateway-list 192.168.10.254
+ network 192.168.10.0 mask 255.255.255.0
+ excluded-ip-address 192.168.10.1 192.168.10.10
+ excluded-ip-address 192.168.10.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN11
+ gateway-list 192.168.11.254
+ network 192.168.11.0 mask 255.255.255.0
+ excluded-ip-address 192.168.11.1 192.168.11.10
+ excluded-ip-address 192.168.11.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN12
+ gateway-list 192.168.12.254
+ network 192.168.12.0 mask 255.255.255.0
+ excluded-ip-address 192.168.12.1 192.168.12.10
+ excluded-ip-address 192.168.12.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN13
+ gateway-list 192.168.13.254
+ network 192.168.13.0 mask 255.255.255.0
+ excluded-ip-address 192.168.13.1 192.168.13.10
+ excluded-ip-address 192.168.13.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN14
+ gateway-list 192.168.14.254
+ network 192.168.14.0 mask 255.255.255.0
+ excluded-ip-address 192.168.14.1 192.168.14.10
+ excluded-ip-address 192.168.14.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN15
+ gateway-list 192.168.15.254
+ network 192.168.15.0 mask 255.255.255.0
+ excluded-ip-address 192.168.15.1 192.168.15.10
+ excluded-ip-address 192.168.15.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN16
+ gateway-list 192.168.16.254
+ network 192.168.16.0 mask 255.255.255.0
+ excluded-ip-address 192.168.16.1 192.168.16.10
+ excluded-ip-address 192.168.16.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN17
+ gateway-list 192.168.17.254
+ network 192.168.17.0 mask 255.255.255.0
+ excluded-ip-address 192.168.17.1 192.168.17.10
+ excluded-ip-address 192.168.17.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN18
+ gateway-list 192.168.18.254
+ network 192.168.18.0 mask 255.255.255.0
+ excluded-ip-address 192.168.18.1 192.168.18.10
+ excluded-ip-address 192.168.18.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN19
+ gateway-list 192.168.19.254
+ network 192.168.19.0 mask 255.255.255.0
+ excluded-ip-address 192.168.19.1 192.168.19.10
+ excluded-ip-address 192.168.19.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN20
+ gateway-list 192.168.20.254
+ network 192.168.20.0 mask 255.255.255.0
+ excluded-ip-address 192.168.20.1 192.168.20.10
+ excluded-ip-address 192.168.20.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN99
+ gateway-list 192.168.99.254
+ network 192.168.99.0 mask 255.255.255.0
+ excluded-ip-address 192.168.99.1 192.168.99.10
+ excluded-ip-address 192.168.99.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN21
+ gateway-list 192.168.21.254
+ network 192.168.21.0 mask 255.255.255.0
+ excluded-ip-address 192.168.21.1 192.168.21.10
+ excluded-ip-address 192.168.21.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN22
+ gateway-list 192.168.22.254
+ network 192.168.22.0 mask 255.255.255.0
+ excluded-ip-address 192.168.22.1 192.168.22.10
+ excluded-ip-address 192.168.22.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN23
+ gateway-list 192.168.23.254
+ network 192.168.23.0 mask 255.255.255.0
+ excluded-ip-address 192.168.23.1 192.168.23.10
+ excluded-ip-address 192.168.23.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN24
+ gateway-list 192.168.24.254
+ network 192.168.24.0 mask 255.255.255.0
+ excluded-ip-address 192.168.24.1 192.168.24.10
+ excluded-ip-address 192.168.24.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN25
+ gateway-list 192.168.25.254
+ network 192.168.25.0 mask 255.255.255.0
+ excluded-ip-address 192.168.25.1 192.168.25.10
+ excluded-ip-address 192.168.25.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN26
+ gateway-list 192.168.26.254
+ network 192.168.26.0 mask 255.255.255.0
+ excluded-ip-address 192.168.26.1 192.168.26.10
+ excluded-ip-address 192.168.26.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN27
+ gateway-list 192.168.27.254
+ network 192.168.27.0 mask 255.255.255.0
+ excluded-ip-address 192.168.27.1 192.168.27.10
+ excluded-ip-address 192.168.27.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN28
+ gateway-list 192.168.28.254
+ network 192.168.28.0 mask 255.255.255.0
+ excluded-ip-address 192.168.28.1 192.168.28.10
+ excluded-ip-address 192.168.28.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN29
+ gateway-list 192.168.29.254
+ network 192.168.29.0 mask 255.255.255.0
+ excluded-ip-address 192.168.29.1 192.168.29.10
+ excluded-ip-address 192.168.29.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN30
+ gateway-list 192.168.30.254
+ network 192.168.30.0 mask 255.255.255.0
+ excluded-ip-address 192.168.30.1 192.168.30.10
+ excluded-ip-address 192.168.30.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+ip pool VLAN31
+ gateway-list 192.168.31.254
+ network 192.168.31.0 mask 255.255.255.0
+ excluded-ip-address 192.168.31.1 192.168.31.10
+ excluded-ip-address 192.168.31.254
+ dns-list 172.16.220.4 8.8.8.8
+#
+return
+save

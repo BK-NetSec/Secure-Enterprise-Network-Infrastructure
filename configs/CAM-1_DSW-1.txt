@@ -1,0 +1,287 @@
+system-view
+sysname CAM-1_DSW-1
+#
+vlan batch 10 to 20 99
+#
+stp mode rstp
+stp root primary
+dhcp enable
+#
+acl number 3010
+ rule 5 permit ip destination 192.168.10.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 permit ip destination 192.168.13.0 0.0.0.255
+ rule 30 permit ip destination 172.16.230.0 0.0.0.255
+ rule 35 deny ip destination 192.168.0.0 0.0.255.255
+ rule 40 deny ip destination 172.16.0.0 0.15.255.255
+ rule 45 deny ip destination 10.0.0.0 0.255.255.255
+ rule 50 permit ip
+#
+acl number 3011
+ rule 5 permit ip destination 192.168.11.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 permit ip destination 172.16.220.3 0
+ rule 30 deny ip destination 192.168.0.0 0.0.255.255
+ rule 35 deny ip destination 172.16.0.0 0.15.255.255
+ rule 40 deny ip destination 10.0.0.0 0.255.255.255
+ rule 45 permit ip
+#
+acl number 3012
+ rule 5 permit ip destination 192.168.12.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 permit ip destination 172.16.220.3 0
+ rule 30 permit ip destination 192.168.13.0 0.0.0.255
+ rule 35 permit ip destination 192.168.99.0 0.0.0.255
+ rule 40 deny ip destination 192.168.0.0 0.0.255.255
+ rule 45 deny ip destination 172.16.0.0 0.15.255.255
+ rule 50 deny ip destination 10.0.0.0 0.255.255.255
+ rule 55 permit ip
+#
+acl number 3013
+ rule 5 permit ip destination 192.168.13.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 deny ip destination 192.168.0.0 0.0.255.255
+ rule 30 deny ip destination 172.16.0.0 0.15.255.255
+ rule 35 deny ip destination 10.0.0.0 0.255.255.255
+ rule 40 permit ip
+#
+acl number 3014
+ rule 5 permit ip destination 192.168.14.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 deny ip destination 192.168.0.0 0.0.255.255
+ rule 25 deny ip destination 172.16.0.0 0.15.255.255
+ rule 30 deny ip destination 10.0.0.0 0.255.255.255
+ rule 35 permit ip
+#
+acl number 3015
+ rule 5 permit ip destination 192.168.15.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 deny ip destination 192.168.0.0 0.0.255.255
+ rule 25 deny ip destination 172.16.0.0 0.15.255.255
+ rule 30 deny ip destination 10.0.0.0 0.255.255.255
+ rule 35 permit ip
+#
+acl number 3017
+ rule 5 permit ip destination 192.168.17.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 permit ip destination 172.16.220.3 0
+ rule 30 permit ip destination 192.168.99.0 0.0.0.255
+ rule 35 deny ip destination 192.168.0.0 0.0.255.255
+ rule 40 deny ip destination 172.16.0.0 0.15.255.255
+ rule 45 deny ip destination 10.0.0.0 0.255.255.255
+ rule 50 permit ip
+#
+acl number 3018
+ rule 5 permit ip destination 192.168.18.0 0.0.0.255
+ rule 10 permit tcp destination 172.16.220.4 0 destination-port eq 53
+ rule 15 permit udp destination 172.16.220.4 0 destination-port eq 53
+ rule 20 permit udp destination 172.16.220.2 0 destination-port eq 67
+ rule 25 permit ip destination 172.16.220.3 0
+ rule 30 permit ip destination 192.168.99.0 0.0.0.255
+ rule 35 deny ip destination 192.168.0.0 0.0.255.255
+ rule 40 deny ip destination 172.16.0.0 0.15.255.255
+ rule 45 deny ip destination 10.0.0.0 0.255.255.255
+ rule 50 permit ip
+#
+acl number 2100
+ rule 5 permit source 192.168.16.0 0.0.0.255
+ rule 10 permit source 192.168.17.0 0.0.0.255
+ rule 15 permit source 192.168.18.0 0.0.0.255
+acl number 2101
+ rule 5 permit source 192.168.11.0 0.0.0.255
+ rule 10 permit source 192.168.12.0 0.0.0.255
+ rule 15 permit source 192.168.13.0 0.0.0.255
+ rule 20 permit source 192.168.19.0 0.0.0.255
+acl number 2102
+ rule 5 permit source 192.168.10.0 0.0.0.255
+ rule 10 permit source 192.168.14.0 0.0.0.255
+ rule 15 permit source 192.168.15.0 0.0.0.255
+acl number 2103
+ rule 5 permit source 192.168.99.0 0.0.0.255
+#
+traffic classifier CONTROL operator or
+ if-match acl 2103
+traffic classifier HIGH operator or
+ if-match acl 2100
+traffic classifier MEDIUM operator or
+ if-match acl 2101
+traffic classifier LOW operator or
+ if-match acl 2102
+#
+traffic behavior CONTROL
+ remark dscp cs6
+traffic behavior HIGH
+ remark dscp af41
+traffic behavior MEDIUM
+ remark dscp af31
+traffic behavior LOW
+ remark dscp af11
+#
+traffic policy CAMPUS-QOS
+ classifier CONTROL behavior CONTROL
+ classifier HIGH behavior HIGH
+ classifier MEDIUM behavior MEDIUM
+ classifier LOW behavior LOW
+#
+interface Eth-Trunk2
+ mode lacp-static
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+#
+interface GigabitEthernet0/0/3
+ eth-trunk 2
+#
+interface GigabitEthernet0/0/4
+ eth-trunk 2
+#
+interface GigabitEthernet0/0/1
+ undo portswitch
+ ip address 10.1.0.2 255.255.255.252
+#
+interface GigabitEthernet0/0/2
+ undo portswitch
+ ip address 10.1.0.14 255.255.255.252
+#
+interface GigabitEthernet0/0/5
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ traffic-policy CAMPUS-QOS inbound
+#
+interface GigabitEthernet0/0/6
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ traffic-policy CAMPUS-QOS inbound
+#
+interface GigabitEthernet0/0/7
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ traffic-policy CAMPUS-QOS inbound
+#
+interface GigabitEthernet0/0/8
+ port link-type trunk
+ port trunk allow-pass vlan 10 to 20 99
+ traffic-policy CAMPUS-QOS inbound
+#
+interface Vlanif10
+ ip address 192.168.10.2 255.255.255.0
+ vrrp vrid 10 virtual-ip 192.168.10.254
+ vrrp vrid 10 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3010
+#
+interface Vlanif11
+ ip address 192.168.11.2 255.255.255.0
+ vrrp vrid 11 virtual-ip 192.168.11.254
+ vrrp vrid 11 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3011
+#
+interface Vlanif12
+ ip address 192.168.12.2 255.255.255.0
+ vrrp vrid 12 virtual-ip 192.168.12.254
+ vrrp vrid 12 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3012
+#
+interface Vlanif13
+ ip address 192.168.13.2 255.255.255.0
+ vrrp vrid 13 virtual-ip 192.168.13.254
+ vrrp vrid 13 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3013
+#
+interface Vlanif14
+ ip address 192.168.14.2 255.255.255.0
+ vrrp vrid 14 virtual-ip 192.168.14.254
+ vrrp vrid 14 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3014
+#
+interface Vlanif15
+ ip address 192.168.15.2 255.255.255.0
+ vrrp vrid 15 virtual-ip 192.168.15.254
+ vrrp vrid 15 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3015
+#
+interface Vlanif16
+ ip address 192.168.16.2 255.255.255.0
+ vrrp vrid 16 virtual-ip 192.168.16.254
+ vrrp vrid 16 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif17
+ ip address 192.168.17.2 255.255.255.0
+ vrrp vrid 17 virtual-ip 192.168.17.254
+ vrrp vrid 17 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3017
+#
+interface Vlanif18
+ ip address 192.168.18.2 255.255.255.0
+ vrrp vrid 18 virtual-ip 192.168.18.254
+ vrrp vrid 18 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+ traffic-filter inbound acl 3018
+#
+interface Vlanif19
+ ip address 192.168.19.2 255.255.255.0
+ vrrp vrid 19 virtual-ip 192.168.19.254
+ vrrp vrid 19 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif20
+ ip address 192.168.20.2 255.255.255.0
+ vrrp vrid 20 virtual-ip 192.168.20.254
+ vrrp vrid 20 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+interface Vlanif99
+ ip address 192.168.99.2 255.255.255.0
+ vrrp vrid 99 virtual-ip 192.168.99.254
+ vrrp vrid 99 priority 120
+ dhcp select relay
+ dhcp relay server-ip 172.16.220.2
+#
+ospf 1 router-id 3.3.3.3
+ silent-interface Vlanif10
+ silent-interface Vlanif11
+ silent-interface Vlanif12
+ silent-interface Vlanif13
+ silent-interface Vlanif14
+ silent-interface Vlanif15
+ silent-interface Vlanif16
+ silent-interface Vlanif17
+ silent-interface Vlanif18
+ silent-interface Vlanif19
+ silent-interface Vlanif20
+ silent-interface Vlanif99
+ area 0.0.0.0
+  network 10.0.0.0 0.255.255.255
+  network 192.168.0.0 0.0.255.255
+#
+return
+save

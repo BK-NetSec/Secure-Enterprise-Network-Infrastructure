@@ -1,0 +1,43 @@
+system-view
+sysname DC_DSW-1
+#
+vlan batch 100 130
+#
+stp mode rstp
+stp root primary
+#
+interface GigabitEthernet0/0/1
+ port link-type access
+ port default vlan 130
+#
+interface Vlanif130
+ ip address 10.10.0.2 255.255.255.252
+#
+interface Eth-Trunk1
+ mode lacp-static
+ port link-type trunk
+ port trunk allow-pass vlan 100
+#
+interface GigabitEthernet0/0/3
+ eth-trunk 1
+#
+interface GigabitEthernet0/0/4
+ eth-trunk 1
+#
+interface GigabitEthernet0/0/5
+ port link-type trunk
+ port trunk allow-pass vlan 100
+#
+interface Vlanif100
+ ip address 172.16.220.252 255.255.255.0
+ vrrp vrid 100 virtual-ip 172.16.220.254
+ vrrp vrid 100 priority 120
+#
+ospf 1 router-id 30.30.30.30
+ silent-interface Vlanif100
+ area 0.0.0.0
+  network 10.10.0.0 0.0.0.3
+  network 172.16.220.0 0.0.0.255
+#
+return
+save

@@ -1,0 +1,65 @@
+system-view
+sysname CORE-2
+#
+vlan batch 140
+#
+interface LoopBack0
+ ip address 2.2.2.2 255.255.255.255
+#
+interface GigabitEthernet1/0/0
+ undo portswitch
+ undo shutdown
+ ip address 10.1.0.13 255.255.255.252
+#
+interface GigabitEthernet1/0/1
+ undo portswitch
+ undo shutdown
+ ip address 10.2.0.9 255.255.255.252
+#
+interface GigabitEthernet1/0/2
+ undo portswitch
+ undo shutdown
+ ip address 10.2.0.5 255.255.255.252
+#
+interface GigabitEthernet1/0/3
+ undo portswitch
+ undo shutdown
+ ip address 10.2.0.13 255.255.255.252
+#
+interface Eth-Trunk1
+ undo portswitch
+ mode lacp-static
+ ip address 10.0.0.2 255.255.255.252
+#
+interface GigabitEthernet1/0/4
+ undo shutdown
+ eth-trunk 1
+#
+interface GigabitEthernet1/0/5
+ undo shutdown
+ eth-trunk 1
+#
+interface GigabitEthernet1/0/6
+ undo portswitch
+ undo shutdown
+ ip address 10.20.20.6 255.255.255.252
+#
+interface GigabitEthernet1/0/8
+ undo portswitch
+ undo shutdown
+ ip address 10.20.20.14 255.255.255.252
+#
+interface GigabitEthernet1/0/9
+ undo shutdown
+ port default vlan 140
+#
+interface Vlanif140
+ ip address 10.10.0.5 255.255.255.252
+#
+ospf 1 router-id 2.2.2.2
+ area 0.0.0.0
+  network 2.2.2.2 0.0.0.0
+  network 10.0.0.0 0.255.255.255
+#
+return
+save
